@@ -1,0 +1,13 @@
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col> Hora </ion-col>
+      <ion-col *ngFor="let dia of dias;"> {{ dia | conversorDia }} </ion-col>
+    </ion-row>
+    <ion-row *ngFor="let asignaturas of horario.cuadrante; let i=index;">
+      <ion-col>{{ i | conversorHoras }}</ion-col>
+      <ion-col *ngFor="let materia of asignaturas;"><ion-button color="blue" (click)="getDescripcion(materia.materia)">{{materia.materia}}</ion-button></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

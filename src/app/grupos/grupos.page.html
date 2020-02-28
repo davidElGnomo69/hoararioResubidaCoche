@@ -1,0 +1,10 @@
+
+<ion-content>
+<h1>Grupos</h1>
+<ion-list>
+    <ion-item  *ngFor="let item of grupos" (click)="paraHorario(item.idGrupo)">
+      <ion-label>{{item.idGrupo}}</ion-label>
+          <ion-label>{{item.nombre}}</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

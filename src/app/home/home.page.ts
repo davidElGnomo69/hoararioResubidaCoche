@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router, NavigationExtras } from '@angular/router';
+import { DatosServicesService } from '../service/datos-services.service';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +9,42 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
+  avalaible = false;
+  private _estudios: string[] = [];
+
+  constructor(public router: Router, public datosServices: DatosServicesService) {}
+
+ 
+
+  paraGrupos(group: string) {
+
+    this.datosServices.getGrupos(group).then((data) => {
+      let navigationExtras: NavigationExtras = {
+        state: {
+          grupo: data
+        }
+      };
+      this.router.navigate(['/grupos'], navigationExtras);
+    }).catch(() => {
+      return null;}
+    );
+  }
+
+  getGrupos(nombre:string){
+    return this.datosServices.getGrupos(nombre);
+  }
+
+  muestraLista() {
+    this.avalaible = true;
+    this.solicitarUsuario();
+  }
+
+  solicitarUsuario() {
+    this.datosServices.getEstudios().then((estudios) => {
+      this._estudios = estudios;
+    }).catch(() => {
+      return null;
+    });
+  }
 
 }
